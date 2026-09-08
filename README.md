@@ -1,4 +1,4 @@
-# YouTube Transcoder
+# Video Transcoder
 
 Upload a video, get HLS streams in 360p / 720p / 1080p with hover thumbnails.
 
