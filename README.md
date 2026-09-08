@@ -36,7 +36,7 @@ FFmpeg binaries are bundled in `tools/ffmpeg/bin` — nothing to install. (Or se
 ## Run
 
 ```sh
-pnpm dev
+pnpm run dev
 ```
 
 - Web: http://localhost:3000
