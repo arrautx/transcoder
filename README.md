@@ -2,6 +2,8 @@
 
 Upload a video, get HLS streams in 360p / 720p / 1080p with hover thumbnails.
 
+[![Watch the demo](https://img.youtube.com/vi/UQf9RDRh8C4/maxresdefault.jpg)](https://youtu.be/UQf9RDRh8C4)
+
 ## Stack
 
 - **Web** — Next.js (`apps/web`)
