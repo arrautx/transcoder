@@ -1,51 +1,37 @@
 # YouTube Transcoder
 
-Upload a video, get HLS streams in multiple qualities (360p, 720p, 1080p) with hover thumbnails.
+Upload a video, get HLS streams in 360p / 720p / 1080p with hover thumbnails.
 
 ## Stack
 
-- **Web** — Next.js + @videojs/react player
-- **API** — Express (file upload + serving)
-- **Worker** — FFmpeg transcoding + thumbnail generation
-- **DB** — PostgreSQL + Drizzle ORM
-- **Queue** — BullMQ-style job queue
-
-## Prerequisites
-
-- Node.js
-- pnpm
-- Docker (for Postgres)
-- FFmpeg & ffprobe
+- **Web** — Next.js (`apps/web`)
+- **API** — Express, uploads + serving (`apps/api`)
+- **Worker** — FFmpeg transcoding + thumbnails (`apps/worker`)
+- **DB** — Neon Postgres + Drizzle (`packages/db`)
+- **Queue** — BullMQ + Upstash Redis (`packages/queue`)
 
 ## Setup
-
-1. Install dependencies
 
 ```sh
 pnpm install
 ```
 
-2. Start Postgres
+Create a `.env` in the repo root:
 
-```sh
-docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres
+```
+DATABASE_URL=postgresql://...
+REDIS_URL=rediss://...
 ```
 
-3. Push the database schema
+Push the schema:
 
 ```sh
 cd packages/db && npx drizzle-kit push
 ```
 
-4. Create a `.env` in `packages/db/`
-
-```
-DATABASE_URL=postgresql://postgres:mysecretpassword@localhost:5432/postgres
-```
+FFmpeg binaries are bundled in `tools/ffmpeg/bin` — nothing to install. (Or set `FFMPEG_PATH` to use your own.)
 
 ## Run
-
-Start everything:
 
 ```sh
 pnpm dev
@@ -56,7 +42,7 @@ pnpm dev
 
 ## How It Works
 
-1. Upload a video at `/upload`
-2. Worker picks it up, generates thumbnail sprites + VTT
+1. Upload at `/upload`
+2. Worker generates thumbnail sprite + VTT
 3. Transcodes to HLS (360p / 720p / 1080p)
-4. Watch at `/videos/{id}`
+4. Watch at `/videos/{id}`, delete via the ⋮ menu
