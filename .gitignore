@@ -32,7 +32,10 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
 
+# FFmpeg binaries (bundled locally, too large for git)
+tools/ffmpeg/
 # Misc
 .DS_Store
 *.pem
